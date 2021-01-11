@@ -31,3 +31,7 @@ Ensuite, injecter les données dans le state de l'app.
 ## Bonus
 
 Charger également les catégories depuis l'url `https://oclock-open-apis.now.sh/api/blog/categories`
+
+
+## React router
+yarn add react-router-dom
