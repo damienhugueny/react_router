@@ -1,0 +1,8 @@
+@import '../../styles/vars';
+
+.copyright {
+    text-align: center;
+    padding:  $gutter;
+    background-color:  $dark-color;
+    color: $alt-color;
+}

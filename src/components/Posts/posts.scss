@@ -1,0 +1,52 @@
+@import '../../styles/vars';
+
+
+
+.posts {
+    max-width: 800px;
+    margin:  $gutter auto;
+
+    .posts-title {
+        color: $primary-color;
+        font-family: $title-font;
+        font-weight: $title-font-weight;
+        text-transform: uppercase;
+        text-align: center;
+        font-size: 2em;
+        margin-bottom: 0.5em;
+    }
+
+    .posts-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.post {
+    width: 50%;
+    padding: $gutter;
+
+    .post-title {
+        font-family: $title-font;
+        font-weight:  $title-font-weight;
+        text-transform: uppercase;
+        font-size: 1.3em;
+        margin-bottom: 0.5rem;
+    }
+
+    .post-category {
+        background-color:  $primary-color;
+        color: $light-color;
+        padding:  0.3em 0.7em;
+        display: inline-block;
+        text-transform: uppercase;
+        font-size:  0.8em;
+        font-weight: bold;
+    }
+
+    .post-excerpt {
+        margin-top: 0.5rem;
+        color: $post-text-color;
+
+    }
+}
