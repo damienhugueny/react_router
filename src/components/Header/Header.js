@@ -1,14 +1,33 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import './header.scss';
 
-const Header = () => (
+const Header = ({ categories, currentCategory }) => (
     <header className="menu">
         <nav>
-            <a className="menu-link menu-link--active">Catégorie 1</a>
-            <a className="menu-link">Catégorie 2</a>
+
+        {categories.map((category) => {
+
+            const className = (category.label === currentCategory ? 'menu-link menu-link--active' : 'menu-link');
+
+            return (
+                <a key={category.label} className={className}>{category.label}</a>
+            );
+        })}
         </nav>
     </header>
 );
+
+Header.prototypes = {
+    categories: PropTypes.arrayOf(
+        PropTypes.shape({
+            route: PropTypes.string.isRequired,
+            label: PropTypes.string.isRequired,
+        }).isRequired,
+    ).isRequired,
+    currentCategory: PropTypes.string.isRequired,
+};
 
 export default Header;

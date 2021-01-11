@@ -6,6 +6,9 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Posts from '../Posts/Posts'
 
+import categoriesData from '../../data/categories';
+import postData from '../../data/posts';
+
 
 class Blog extends React.Component {
 
@@ -14,8 +17,8 @@ class Blog extends React.Component {
 
         return (
             <div className="blog">
-                <Header />
-                <Posts />
+                <Header categories={categoriesData} currentCategory="Accueil"/>
+                <Posts posts={postData} />
                 <Footer />
             </div>
         );
