@@ -10,9 +10,13 @@
         margin: 0 1rem;
         color:  $dark-color;
         cursor: pointer;
+        transition-duration: 350ms;
+        transition-property: color;
 
         &:hover, &--active {
             color: $primary-color;
+            transition-duration: 350ms;
+            transition-property: color;
         }
 
     }
