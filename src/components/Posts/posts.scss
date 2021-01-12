@@ -25,6 +25,14 @@
 .post {
     width: 44%;
     padding: $gutter;
+    transition-duration: 1.5s;
+    transition-property: background-color;
+
+    &:hover {
+        background-color: $post-hover-color;
+        transition-duration: 250ms;
+        transition-property: background-color;
+    }
 
     .post-title {
         font-family: $title-font;
