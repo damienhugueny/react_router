@@ -7,7 +7,7 @@
   "scripts": {
     "build": "webpack --mode=production",
     "build:dev": "webpack --mode=development",
-    "start": "webpack-dev-server --open --mode development --inline",
+    "start": "webpack-dev-server --open --mode=development ",
     "start:dev": "webpack serve --open --mode=development"
   },
   "devDependencies": {
@@ -19,12 +19,14 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "bundle-stats": "1.15.8",
     "file-loader": "^6.2.0",
     "node-sass": "^5.0.0",
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.1"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "css-loader": "^5.0.1",
     "i": "^0.3.6",

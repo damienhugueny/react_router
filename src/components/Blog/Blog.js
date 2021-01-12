@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+// librairie pour faciliter les appels AJAX
+import axios from 'axios';
+
 
 // composant Switch : seulement le première route qui correspond est rendu =>
 // utile pour page d'erreur 404
@@ -29,6 +32,8 @@ import { getPostsByCategory } from '../../utils/selectors';
  X ajouter une bouton pour déclencher le chargement des articles
  - créer un status loading
  - Challenge : lancer le chargement
+  fonction va relancer le rendu du composant, il faut fournir la nouvelle
+  valeur comme argument
 */
 
 // TODO : faire une jolie page d'erreur 404:
@@ -58,11 +63,42 @@ const Blog = () => {
         const [loading, setLoading] = useState(false);
  
     const loadPosts = () => {
-        console.log('il faut charger les articles');
+        
+        setLoading(true);
 
         // TODO faire appel à une API et récupérer la réponse puis appeler setPosts
         // TODO avec ce qu'on a récupéré
         //setPosts(postsData);
+
+        // Afficher la div chargement
+
+        console.log('il faut charger les articles'); 
+
+        axios.get('https://oclock-open-apis.now.sh/api/blog/posts')
+            .then((response) => {
+                // callback éxécutée en cas de succès (par exemple code de retour 200)
+                //console.log('success : ' + response); 
+                console.log(response.data)
+                setPosts(response.data);
+                
+            })
+            .catch((error) => {
+                // callback éxécutée en cas d'échec (par exemple code de retour 404)
+                console.log('error: ' + error) 
+            })
+            .finally(() => {
+                // callback éxécutée dans tous les cas, après succès ou échec
+                // permet dnotament d'enlever un loader
+                //console.log('finally'); 
+                setLoading(false);
+            });
+
+        console.log('On a lancé le chargement des articles');
+
+        // affiche 'false' =>  la mise à jour du state est asynchrone (pareil avec
+        // setState), on à accès à la nouvelle valeur seulement au moment du rendu
+        // suivent du composant
+        console.log(loading);
     };
 
 
