@@ -35,3 +35,6 @@ Charger également les catégories depuis l'url `https://oclock-open-apis.now.sh
 
 ## React router
 yarn add react-router-dom
+
+// librairie pour "nettoyer" le code HTML et pouvoir
+yarn add dompurify
