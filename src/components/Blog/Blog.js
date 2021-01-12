@@ -14,7 +14,8 @@ import './blog.scss';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Posts from '../Posts/Posts'
+import Posts from '../Posts/Posts';
+import Loader from '../Loader/Loader';
 
 import categoriesData from '../../data/categories';
 import postsData from '../../data/posts';
@@ -46,6 +47,7 @@ const Blog = () => {
     console.log(useState('coucou'));
 
     const [posts, setPosts] = useState([]);
+    const [categories, setCategories] = useState([]);
     /*  équivalent =>
         this.state = {
             posts: []
@@ -61,6 +63,9 @@ const Blog = () => {
 
         /** indique si on est en cours de chargement */
         const [loading, setLoading] = useState(true);
+
+        /** indique si on est en cours de chargement pour les catégories */
+        const [loadingCategories, setLoadingCategories] = useState(true);
 
     // useEffect est équivalent à componentDidMount + componentDidUpdate si écrit
     // comme ça :
@@ -113,36 +118,69 @@ const Blog = () => {
         console.log(loading);
     };
 
+    const loadCategories = () => {
+        console.log('il faut charger les catégories'); 
+
+        axios.get('https://oclock-open-apis.now.sh/api/blog/categories')
+            .then((response) => {
+                // callback éxécutée en cas de succès (par exemple code de retour 200)
+                //console.log('success : ' + response); 
+                console.log(response.data)
+                setCategories(response.data);
+                
+            })
+            .catch((error) => {
+                // callback éxécutée en cas d'échec (par exemple code de retour 404)
+                console.log('error: ' + error) 
+            })
+            .finally(() => {
+                // callback éxécutée dans tous les cas, après succès ou échec
+                // permet dnotament d'enlever un loader
+                //console.log('finally'); 
+                setLoadingCategories(false);
+            });
+
+        console.log('On a lancé le chargement des catégories');
+    };
+
     // et si le tableau de dépendances est vide : éxécuté seulement après le remier rendu du composant,
     // donc c'est équivalent à componentDidMount si le composent était écrit sous forme de classe
     useEffect(() => {
         //console.log('devait être affiché seulement après le premier rendu');
         loadPosts();
+        loadCategories();
     }, []);
 
     console.log('rendu du composant blog');
 
+    const displayLoader = loadingCategories || loading;
+
     return (
         <div className="blog">
-            <Header categories={categoriesData} />
-           
-            { loading && <div>Chargement en cours</div>}
-            <Switch>
-            <Redirect from="/jquery" to="/autre" />
-                {categoriesData.map((category) => (
 
-                <Route exact path={category.route} key={category.label}>
-                    <Posts posts={getPostsByCategory(posts, category.label)} />
-                </Route>
+            {! loadingCategories &&  <Header categories={categories} />}
 
-                ))}
-                <Route>
-                    <div>
-                        <h1>Ooâss, la page n'existe pas</h1>
-                        Mais on a plein d'articles, regarde par exemple <Link to="/React">notre page sur React</Link>
-                    </div>
-                </Route>
-            </Switch>
+            { displayLoader && <Loader />}
+
+            {! loadingCategories && (
+
+                <Switch>
+                    <Redirect from="/jquery" to="/autre" />
+                    {categories.map((category) => (
+
+                    <Route exact path={category.route} key={category.label}>
+                        <Posts posts={getPostsByCategory(posts, category.label)} />
+                    </Route>
+
+                    ))}
+                    <Route>
+                        <div>
+                            <h1>Ooâss, la page n'existe pas</h1>
+                            Mais on a plein d'articles, regarde par exemple <Link to="/React">notre page sur React</Link>
+                        </div>
+                    </Route>
+                </Switch>
+            )}
             <Footer />
         </div>
     );
