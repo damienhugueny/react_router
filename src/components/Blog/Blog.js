@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // librairie pour faciliter les appels AJAX
 import axios from 'axios';
@@ -61,6 +61,24 @@ const Blog = () => {
 
         /** indique si on est en cours de chargement */
         const [loading, setLoading] = useState(false);
+
+    // useEffect est équivalent à componentDidMount + componentDidUpdate si écrit
+    // comme ça :
+    // useEffect(() => {
+    //     console.log('appel à useEffect') 
+    // });
+
+    // useEffect écrit comme ça : exécute l'effet après le premier rendu, puis après les autres
+    // rendus seulement si loading a changé
+    // useEffect(() => {
+    //     console.log('loading a changé de valeur')
+    // }, [loading]); 
+
+    // et si le tableau de dépendances est vide : éxécuté seulement après le remier rendu du composant,
+    // donc c'est équivalent à componentDidMount si le composent était écrit sous forme de classe
+    useEffect(() => {
+        console.log('devait être affiché seulement après le premier rendu')
+    }, []);
  
     const loadPosts = () => {
         
@@ -101,6 +119,7 @@ const Blog = () => {
         console.log(loading);
     };
 
+    console.log('rendu du composant blog');
 
     return (
         <div className="blog">
