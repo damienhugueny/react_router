@@ -47,6 +47,12 @@ const Blog = () => {
     console.log(useState('coucou'));
 
     const [posts, setPosts] = useState([]);
+
+    // !!! interdit d'utiliser les hooks dans des boucles if, ...
+    // if(categories.lenght > 0) {
+    //     const [categories, setCategories] = useState([]);
+    // }
+
     const [categories, setCategories] = useState([]);
     /*  équivalent =>
         this.state = {
@@ -155,6 +161,8 @@ const Blog = () => {
 
     const displayLoader = loadingCategories || loading;
 
+    if (displayLoader) return (<Loader/>);
+
     return (
         <div className="blog">
 
@@ -181,7 +189,7 @@ const Blog = () => {
                     </Route>
                 </Switch>
             )}
-            <Footer />
+            <Footer years="2021"/>
         </div>
     );
 }

@@ -38,3 +38,7 @@ yarn add react-router-dom
 
 // librairie pour "nettoyer" le code HTML et pouvoir
 yarn add dompurify
+
+
+video 
+3/40:56 Axios et useEffect
