@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types'
 
 import './posts.scss';
 
@@ -13,17 +13,28 @@ import Post from './Post';
  * Depuis la version 1.8.4, affichage en utilisant flex
  */
 
-const Posts = ({ posts }) => (
-    <main className="posts">
-        <h1 className ="posts-title">Dev of thrones</h1>
-        <div className="posts-list">
-        {posts.map((post) => (
-            <Post key={post.id} {...post} />
-        ))}
+const Posts = ({ posts, category }) => {
 
-        </div>
-    </main>
-);
+    // useEffect est lié à un composant
+    useEffect(() => {
+        console.log('useEffect sur Posts')
+        document.title= category;
+    });
+
+    console.log('Rendu composant Posts')
+
+    return(
+        <main className="posts">
+            <h1 className ="posts-title">{category}</h1>
+            <div className="posts-list">
+            {posts.map((post) => (
+                <Post key={post.id} {...post} />
+            ))}
+
+            </div>
+        </main>
+    );
+};
 
 Posts.prototype = {
     /** les articles à afficher */
@@ -37,6 +48,7 @@ Posts.prototype = {
      * @param {string} newValue new value of the input
      */
     // handleChange: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
 };
 
 export default Posts;

@@ -177,8 +177,10 @@ const Blog = () => {
                     {categories.map((category) => (
 
                     <Route exact path={category.route} key={category.label}>
-                        <Posts posts={getPostsByCategory(posts, category.label)} />
-                    </Route>
+                        <Posts 
+                            posts={getPostsByCategory(posts, category.label)}
+                            category={category.label === 'Accueil'? 'Dev of thrones': category.label} />
+                        </Route>
 
                     ))}
                     <Route>
